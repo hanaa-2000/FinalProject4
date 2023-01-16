@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/activity_authentication.xml" value="0.1" />
+        <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/activity_remind.xml" value="0.1" />
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/activity_reminder_description.xml" value="0.1" />
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/activity_reminders.xml" value="0.1" />
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/fragment_reminders.xml" value="0.1" />
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/fragment_save_reminder.xml" value="0.1" />
+        <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/fragment_select_location.xml" value="0.1" />
         <entry key="..\:/Apps_pro/android/Project4/app/src/main/res/layout/it_reminder.xml" value="0.1" />
         <entry key="..\:/Users/MK/Downloads/Location-Reminder-main/Location-Reminder-main/app/src/main/res/layout/activity_authentication.xml" value="0.14402173913043478" />
         <entry key="..\:/Users/MK/Downloads/Location-Reminder-main/Location-Reminder-main/app/src/main/res/layout/activity_reminder_description.xml" value="0.14402173913043478" />

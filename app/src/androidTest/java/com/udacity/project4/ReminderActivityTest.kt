@@ -14,7 +14,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.udacity.project4.data.RemindDataSource
-import com.udacity.project4.local.Database
+import com.udacity.project4.local.LocalDatabase
 import com.udacity.project4.local.RemindRepository
 import com.udacity.project4.remindlist.RemindListViewModel
 import com.udacity.project4.savereminder.SaveRemindViewModel
@@ -62,7 +62,7 @@ class ReminderActivityTest :
                 )
             }
             single { RemindRepository(get()) as RemindDataSource }
-            single { Database.createRemindersDao(appContext) }
+            single { LocalDatabase.createRemindersDao(appContext) }
         }
 
         startKoin {

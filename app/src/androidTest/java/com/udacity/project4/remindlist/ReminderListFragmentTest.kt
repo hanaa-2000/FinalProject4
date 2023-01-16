@@ -18,7 +18,7 @@ import androidx.test.filters.MediumTest
 import com.udacity.project4.R
 import com.udacity.project4.data.RemindDataSource
 import com.udacity.project4.data.RemindData
-import com.udacity.project4.local.Database
+import com.udacity.project4.local.LocalDatabase
 import com.udacity.project4.local.RemindRepository
 import com.udacity.project4.savereminder.SaveRemindViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -68,7 +68,7 @@ class ReminderListFragmentTest: AutoCloseKoinTest() {
                 )
             }
             single { RemindRepository(get()) as RemindDataSource }
-            single { Database.createRemindersDao(appContext) }
+            single { LocalDatabase.createRemindersDao(appContext) }
         }
         startKoin {
             modules(listOf(myModule))

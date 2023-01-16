@@ -6,7 +6,7 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
 import com.udacity.project4.R
-import com.udacity.project4.Authentication
+import com.udacity.project4.AuthenticationActivity
 import com.udacity.project4.basic.BasicFragment
 import com.udacity.project4.basic.Navigation
 import com.udacity.project4.databinding.FragmentRemindersBinding
@@ -16,7 +16,7 @@ import com.udacity.project4.until.setup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReminderListFragment : BasicFragment() {
-    //use Koin to retrieve the ViewModel instance
+
     override val _viewModel: RemindListViewModel by viewModel()
     private lateinit var binding: FragmentRemindersBinding
     override fun onCreateView(
@@ -73,7 +73,7 @@ class ReminderListFragment : BasicFragment() {
             R.id.logout -> {
                 AuthUI.getInstance().signOut(requireContext())
                     .addOnSuccessListener {
-                        val intent = Intent(activity, Authentication::class.java)
+                        val intent = Intent(activity, AuthenticationActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)

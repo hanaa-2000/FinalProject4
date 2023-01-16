@@ -13,9 +13,7 @@ abstract class RemindRecyclerView<T>(private val callback: ((item: T) -> Unit)? 
 
     private var _items: MutableList<T> = mutableListOf()
 
-    /**
-     * Returns the _items data
-     */
+
     private val items: List<T>?
         get() = this._items
 
@@ -42,19 +40,13 @@ abstract class RemindRecyclerView<T>(private val callback: ((item: T) -> Unit)? 
 
     fun getItem(position: Int) = _items[position]
 
-    /**
-     * Adds data to the actual Dataset
-     *
-     * @param items to be merged
-     */
+
     fun addData(items: List<T>) {
         _items.addAll(items)
         notifyDataSetChanged()
     }
 
-    /**
-     * Clears the _items data
-     */
+
     fun clear() {
         _items.clear()
         notifyDataSetChanged()

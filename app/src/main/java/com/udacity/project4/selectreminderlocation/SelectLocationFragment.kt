@@ -35,7 +35,7 @@ class SelectLocationFragment : BasicFragment(), OnMapReadyCallback {
 
     private val TAG = SelectLocationFragment::class.java.simpleName
 
-    //Use Koin to get the view model of the SaveReminder
+
     override val _viewModel: SaveRemindViewModel by inject()
     private lateinit var binding: FragmentSelectLocationBinding
     private lateinit var map: GoogleMap

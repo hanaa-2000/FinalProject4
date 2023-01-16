@@ -10,7 +10,10 @@ import com.udacity.project4.data.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
@@ -20,19 +23,21 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
+
 @MediumTest
-class RemindRepositoryTest {
+class RemindersLocalRepositoryTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var remindersLocalRepository: RemindRepository
 
-    private lateinit var database: ReminderDatabase
+    private lateinit var database:ReminderDatabase
 
     @Before
     fun setup() {
-           database = Room.inMemoryDatabaseBuilder(
+
+        database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             ReminderDatabase::class.java
         ).allowMainThreadQueries().build()
@@ -54,10 +59,10 @@ class RemindRepositoryTest {
         val reminder = RemindData("My Shop", "Get to the Shop", "Abuja", 6.54545, 7.54545)
         remindersLocalRepository.saveReminder(reminder)
 
-        val result = remindersLocalRepository.getReminder(reminder.id) as? com.udacity.project4.data.ResultData.Result.Success
+        val result = remindersLocalRepository.getReminder(reminder.id) as? Result.Success
 
-        assertThat(result is com.udacity.project4.data.ResultData.Result.Success, `is`(true))
-        result as com.udacity.project4.data.ResultData.Result.Success
+        assertThat(result is Result.Success, `is`(true))
+        result as Result.Success
 
 
         assertThat(result.data.title, `is`(reminder.title))
@@ -77,8 +82,8 @@ class RemindRepositoryTest {
 
         val result = remindersLocalRepository.getReminders()
 
-        assertThat(result is com.udacity.project4.data.ResultData.Result.Success, `is`(true))
-        result as com.udacity.project4.data.ResultData.Result.Success
+        assertThat(result is Result.Success, `is`(true))
+        result as Result.Success
 
         assertThat(result.data, `is` (emptyList()))
     }
@@ -92,8 +97,8 @@ class RemindRepositoryTest {
 
         val result = remindersLocalRepository.getReminder(reminder.id)
 
-        assertThat(result is com.udacity.project4.data.ResultData.Result.Error, `is`(true))
-        result as com.udacity.project4.data.ResultData.Result.Error
+        assertThat(result is Result.Error, `is`(true))
+        result as Result.Error
         assertThat(result.message, `is`("Reminder not found!"))
     }
 

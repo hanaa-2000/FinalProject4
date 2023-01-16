@@ -21,10 +21,12 @@ class RemindListViewModel(
         viewModelScope.launch {
             val result = dataSource.getReminders()
             showLoading.postValue(false)
+
             when (result) {
-                is com.udacity.project4.data.Result.Success<*> -> {
+                is Result.Success<*> -> {
                     val dataList = ArrayList<RemindDataItem>()
                     dataList.addAll((result.data as List<RemindData>).map { reminder ->
+
                         RemindDataItem(
                             reminder.title,
                             reminder.description,
@@ -36,9 +38,10 @@ class RemindListViewModel(
                     })
                     remindersList.value = dataList
                 }
-                is com.udacity.project4.data.Result.Error ->
+                is Result.Error ->
                     showSnackBar.value = result.message
             }
+
 
             invalidateShowNoData()
         }

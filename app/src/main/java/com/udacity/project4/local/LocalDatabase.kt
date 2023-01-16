@@ -5,7 +5,7 @@ import androidx.room.Room
 
 
 
-object Database {
+object LocalDatabase {
 
 
     fun createRemindersDao(context: Context): RemindDao {

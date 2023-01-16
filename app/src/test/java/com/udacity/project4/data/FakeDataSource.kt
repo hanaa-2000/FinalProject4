@@ -1,5 +1,11 @@
 package com.udacity.project4.data
 
+import com.udacity.project4.data.RemindData
+import com.udacity.project4.data.Result
+import com.udacity.project4.remindlist.RemindDataItem
+import net.bytebuddy.implementation.bytecode.Throw
+
+
 class FakeDataSource(var remindersList: MutableList<RemindData>? = mutableListOf()) : RemindDataSource {
 
 
@@ -12,16 +18,16 @@ class FakeDataSource(var remindersList: MutableList<RemindData>? = mutableListOf
 
     override suspend fun getReminders(): Result<List<RemindData>> {
         if (shouldReturnError) {
-        return Result.Error(
-            "Error getting reminders"
-        )
-    }
+            return Result.Error(
+                "Error getting reminders"
+            )
+        }
         remindersList?.let { return Result.Success(it) }
         return Result.Error("Reminders not found")
     }
 
     override suspend fun saveReminder(reminder: RemindData) {
-       remindersList?.add(reminder)
+        remindersList?.add(reminder)
     }
 
     override suspend fun getReminder(id: String): Result<RemindData> {
@@ -29,17 +35,17 @@ class FakeDataSource(var remindersList: MutableList<RemindData>? = mutableListOf
             reminderDTO.id == id
         }
 
-       return when {
+        return when {
             shouldReturnError -> {
                 Result.Error("Reminder not found!")
             }
 
-           reminder != null -> {
-               Result.Success(reminder)
-           }
-           else -> {
-               Result.Error("Reminder not found!")
-           }
+            reminder != null -> {
+                Result.Success(reminder)
+            }
+            else -> {
+                Result.Error("Reminder not found!")
+            }
         }
     }
 

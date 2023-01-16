@@ -2,7 +2,7 @@ package com.udacity.project4
 
 import android.app.Application
 import com.udacity.project4.data.RemindDataSource
-import com.udacity.project4.local.Database
+import com.udacity.project4.local.LocalDatabase
 import com.udacity.project4.local.RemindRepository
 import com.udacity.project4.remindlist.RemindListViewModel
 import com.udacity.project4.savereminder.SaveRemindViewModel
@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class MainApp : Application() {
+class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -31,11 +31,11 @@ class MainApp : Application() {
                 )
             }
             single { RemindRepository(get()) as RemindDataSource }
-            single { Database.createRemindersDao(this@MainApp) }
+            single { LocalDatabase.createRemindersDao(this@MyApp) }
         }
 
         startKoin {
-            androidContext(this@MainApp)
+            androidContext(this@MyApp)
             modules(listOf(myModule))
         }
     }
