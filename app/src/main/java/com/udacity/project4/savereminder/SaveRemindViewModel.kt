@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.PointOfInterest
 import com.udacity.project4.R
 import com.udacity.project4.basic.BasicViewModel
-import com.udacity.project4.basic.Navigation
+import com.udacity.project4.basic.NavigationCommand
 import com.udacity.project4.data.RemindDataSource
 import com.udacity.project4.data.RemindData
 import com.udacity.project4.remindlist.RemindDataItem
@@ -53,7 +53,7 @@ class SaveRemindViewModel(val app: Application, val dataSource: RemindDataSource
             )
             showLoading.value = false
             showToast.value = app.getString(R.string.reminder_saved)
-            navigationCommand.value = Navigation.Back
+            navigationCommand.value = NavigationCommand.Back
         }
     }
 

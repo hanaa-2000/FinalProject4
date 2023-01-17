@@ -8,7 +8,7 @@ import com.udacity.project4.until.SingleLive
 
 abstract class BasicViewModel(app: Application) : AndroidViewModel(app) {
 
-    val navigationCommand: SingleLive<Navigation> = SingleLive()
+    val navigationCommand: SingleLive<NavigationCommand> = SingleLive()
     val showErrorMessage: SingleLive<String> = SingleLive()
     val showSnackBar: SingleLive<String> = SingleLive()
     val showSnackBarInt: SingleLive<Int> = SingleLive()

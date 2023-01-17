@@ -40,10 +40,13 @@ class AuthenticationActivity : AppCompatActivity() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
 
-
+            // This is where you can provide more ways for users to register and
+            // sign in.
         )
 
-
+        // Create and launch sign-in intent.
+        // We listen to the response of this activity with the
+        // SIGN_IN_REQUEST_CODE
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -65,7 +68,9 @@ class AuthenticationActivity : AppCompatActivity() {
                 startReminderActivity()
 
             } else {
-
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
                 Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
                 Toast.makeText(this, "Sign in unsuccessful", Toast.LENGTH_SHORT).show()
             }

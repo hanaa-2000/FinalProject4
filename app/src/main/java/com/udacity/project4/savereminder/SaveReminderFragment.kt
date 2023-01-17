@@ -17,6 +17,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -24,10 +27,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
 import com.udacity.project4.basic.BasicFragment
-import com.udacity.project4.basic.Navigation
+import com.udacity.project4.basic.NavigationCommand
 import com.udacity.project4.databinding.FragmentSaveReminderBinding
-import com.udacity.project4.locationreminders.geo.BroadcastReceiver
 import com.udacity.project4.locationreminders.geo.GeofenceUtils
+import com.udacity.project4.locationreminders.geo.BroadcastReceiver
 import com.udacity.project4.remindlist.RemindDataItem
 import com.udacity.project4.until.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
@@ -40,14 +43,17 @@ private const val LOCATION_PERMISSION_INDEX = 0
 private const val BACKGROUND_LOCATION_PERMISSION_INDEX = 1
 
 class SaveReminderFragment : BasicFragment() {
+    //Get the view model this time as a single to be shared with the another fragment
     override val _viewModel: SaveRemindViewModel by inject()
     private lateinit var binding: FragmentSaveReminderBinding
 
-    private lateinit var remindDataItem: RemindDataItem
+    private lateinit var reminderDataItem: RemindDataItem
     private val runningQOrLater = android.os.Build.VERSION.SDK_INT >=
             android.os.Build.VERSION_CODES.Q
 
-
+    /**
+     * Pending Geofence intent to handle geofence transition
+     * */
     private val geofencePendingIntent: PendingIntent by lazy {
         val intent = Intent(requireContext(), BroadcastReceiver::class.java)
         intent.action = ACTION_GEOFENCE_EVENT
@@ -77,8 +83,9 @@ class SaveReminderFragment : BasicFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.selectLocation.setOnClickListener {
+            //            Navigate to another fragment to get the user location
             _viewModel.navigationCommand.value =
-                Navigation.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToSelectLocationFragment())
+                NavigationCommand.To(SaveReminderFragmentDirections.actionSaveReminderFragmentToSelectLocationFragment())
         }
 
         binding.saveReminder.setOnClickListener {
@@ -89,9 +96,9 @@ class SaveReminderFragment : BasicFragment() {
             val longitude = _viewModel.longitude.value
 
 
-             remindDataItem = RemindDataItem(title, description, location, latitude, longitude)
+            reminderDataItem = RemindDataItem(title, description, location, latitude, longitude)
 
-            if (_viewModel.validateEnteredData(remindDataItem)){
+            if (_viewModel.validateEnteredData(reminderDataItem)){
                 if (foregroundAndBackgroundLocationPermissionApproved()){
                     checkDeviceLocationSettingsAndStartGeofence()
                 } else {
@@ -209,7 +216,7 @@ class SaveReminderFragment : BasicFragment() {
 
     @SuppressLint("MissingPermission")
     private fun addGeoFenceForRemainder() {
-        val currentGeofenceData = remindDataItem
+        val currentGeofenceData = reminderDataItem
 
         val geofence = Geofence.Builder()
             .setRequestId(currentGeofenceData.id)
@@ -230,7 +237,7 @@ class SaveReminderFragment : BasicFragment() {
 
         geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
             addOnSuccessListener {
-                _viewModel.validateAndSaveReminder(remindDataItem)
+                _viewModel.validateAndSaveReminder(reminderDataItem)
             }
             addOnFailureListener {
                 Toast.makeText(requireContext(), "Error Occurred", Toast.LENGTH_SHORT).show()
@@ -254,6 +261,7 @@ class SaveReminderFragment : BasicFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        //make sure to clear the view model after destroy, as it's a single view model.
         _viewModel.onClear()
 
     }

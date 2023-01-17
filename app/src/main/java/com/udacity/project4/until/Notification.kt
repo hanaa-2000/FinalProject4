@@ -7,18 +7,18 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
+import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
 import com.udacity.project4.RemindDescription
 import com.udacity.project4.remindlist.RemindDataItem
-import com.udacity.project4.BuildConfig
-
 
 private const val NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".channel"
 
-fun sendNotification(context: Context, remindDataItem: RemindDataItem) {
+fun sendNotification(context: Context, reminderDataItem: RemindDataItem) {
     val notificationManager = context
         .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+    // We need to create a NotificationChannel associated with our CHANNEL_ID before sending a notification.
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
         && notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID) == null
     ) {
@@ -31,18 +31,20 @@ fun sendNotification(context: Context, remindDataItem: RemindDataItem) {
         notificationManager.createNotificationChannel(channel)
     }
 
-    val intent = RemindDescription.newIntent(context.applicationContext, remindDataItem)
+    val intent = RemindDescription.newIntent(context.applicationContext, reminderDataItem)
 
+    //create a pending intent that opens ReminderDescriptionActivity when the user clicks on the notification
     val stackBuilder = TaskStackBuilder.create(context)
         .addParentStack(RemindDescription::class.java)
         .addNextIntent(intent)
     val notificationPendingIntent = stackBuilder
         .getPendingIntent(getUniqueId(), PendingIntent.FLAG_UPDATE_CURRENT)
 
+//    build the notification object with the data to be shown
     val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
         .setSmallIcon(R.mipmap.ic_launcher)
-        .setContentTitle(remindDataItem.title)
-        .setContentText(remindDataItem.location)
+        .setContentTitle(reminderDataItem.title)
+        .setContentText(reminderDataItem.location)
         .setContentIntent(notificationPendingIntent)
         .setAutoCancel(true)
         .build()

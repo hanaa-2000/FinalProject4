@@ -28,9 +28,9 @@ abstract class BasicFragment : Fragment() {
 
         _viewModel.navigationCommand.observe(this, Observer { command ->
             when (command) {
-                is Navigation.To -> findNavController().navigate(command.directions)
-                is Navigation.Back -> findNavController().popBackStack()
-                is Navigation.BackTo -> findNavController().popBackStack(
+                is NavigationCommand.To -> findNavController().navigate(command.directions)
+                is NavigationCommand.Back -> findNavController().popBackStack()
+                is NavigationCommand.BackTo -> findNavController().popBackStack(
                     command.destinationId,
                     false
                 )

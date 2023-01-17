@@ -8,7 +8,7 @@ import com.firebase.ui.auth.AuthUI
 import com.udacity.project4.R
 import com.udacity.project4.AuthenticationActivity
 import com.udacity.project4.basic.BasicFragment
-import com.udacity.project4.basic.Navigation
+import com.udacity.project4.basic.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding
 import com.udacity.project4.until.setDisplayHomeAsUpEnabled
 import com.udacity.project4.until.setTitle
@@ -55,7 +55,7 @@ class ReminderListFragment : BasicFragment() {
 
     private fun navigateToAddReminder() {
         _viewModel.navigationCommand.postValue(
-            Navigation.To(
+            NavigationCommand.To(
                 ReminderListFragmentDirections.toSaveReminder()
             )
         )

@@ -21,7 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.udacity.project4.R
 import com.udacity.project4.basic.BasicFragment
-import com.udacity.project4.basic.Navigation
+import com.udacity.project4.basic.NavigationCommand
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.savereminder.SaveRemindViewModel
 import com.udacity.project4.until.setDisplayHomeAsUpEnabled
@@ -96,7 +96,7 @@ class SelectLocationFragment : BasicFragment(), OnMapReadyCallback {
             _viewModel.latitude.value = marker.position.latitude
             _viewModel.longitude.value = marker.position.longitude
             _viewModel.reminderSelectedLocationStr.value = marker.title
-            _viewModel.navigationCommand.value = Navigation.Back
+            _viewModel.navigationCommand.value = NavigationCommand.Back
         }
 
     }
