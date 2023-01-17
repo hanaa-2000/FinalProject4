@@ -18,13 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RemindDescription" />
+        <activity android:name=".RemindDescriptionActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".AuthenticationActivity"
+        <activity android:name=".authentication.AuthenticationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,17 +32,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RemindActivity"
-            android:exported="true">
+        <activity android:name=".RemindActivity" >
 
 
         </activity>
         <receiver
-            android:name=".locationreminders.geo.BroadcastReceiver"
+            android:name=".locationreminders.geo.geoBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".locationreminders.geo.TransitionService"
+            android:name=".locationreminders.geo.TransitionsService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>

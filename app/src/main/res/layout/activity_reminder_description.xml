@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".RemindDescription">
+        tools:context=".RemindDescriptionActivity">
 
         <TextView
             android:id="@+id/title_textview"

@@ -9,13 +9,13 @@ import com.udacity.project4.databinding.ActivityReminderDescriptionBinding
 import com.udacity.project4.remindlist.RemindDataItem
 
 
-class RemindDescription : AppCompatActivity() {
+class RemindDescriptionActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_ReminderDataItem = "EXTRA_ReminderDataItem"
 
         fun newIntent(context: Context, remindDataItem: RemindDataItem): Intent {
-            val intent = Intent(context, RemindDescription::class.java)
+            val intent = Intent(context, RemindDescriptionActivity::class.java)
             intent.putExtra(EXTRA_ReminderDataItem, remindDataItem)
             return intent
         }

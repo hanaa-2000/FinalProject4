@@ -318,4 +318,13 @@ dependencies {
     //Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
 
+
+    //Maps & Geofencing
+    implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
+
+
+    //Timber
+    implementation 'com.github.ajalt:timberkt:1.5.1'
+
 }

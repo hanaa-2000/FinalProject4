@@ -6,7 +6,7 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
 import com.udacity.project4.R
-import com.udacity.project4.AuthenticationActivity
+import com.udacity.project4.authentication.AuthenticationActivity
 import com.udacity.project4.basic.BasicFragment
 import com.udacity.project4.basic.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding

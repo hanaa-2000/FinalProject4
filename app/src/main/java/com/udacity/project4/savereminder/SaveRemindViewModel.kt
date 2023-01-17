@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 
 class SaveRemindViewModel(val app: Application, val dataSource: RemindDataSource) :
     BasicViewModel(app) {
-    val reminderTitle = MutableLiveData<String?>()
-    val reminderDescription = MutableLiveData<String?>()
-    val reminderSelectedLocationStr = MutableLiveData<String?>()
-    val selectedPOI = MutableLiveData<PointOfInterest?>()
-    val latitude = MutableLiveData<Double?>()
-    val longitude = MutableLiveData<Double?>()
-
+    val reminderTitle = MutableLiveData<String>()
+    val reminderDescription = MutableLiveData<String>()
+    val reminderSelectedLocationStr = MutableLiveData<String>()
+    val selectedPOI = MutableLiveData<PointOfInterest>()
+    val latitude = MutableLiveData<Double>()
+    val longitude = MutableLiveData<Double>()
+    val GEOFENCE_RADIUS = 30f
 
     fun onClear() {
         reminderTitle.value = null
@@ -37,6 +37,7 @@ class SaveRemindViewModel(val app: Application, val dataSource: RemindDataSource
             saveReminder(reminderData)
         }
     }
+
 
     fun saveReminder(reminderData: RemindDataItem) {
         showLoading.value = true
