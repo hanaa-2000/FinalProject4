@@ -1,4 +1,4 @@
-///package com.udacity.project4.data
+package com.udacity.project4.data
 
 import com.udacity.project4.data.RemindDataSource
 import com.udacity.project4.data.RemindData
