@@ -16,7 +16,7 @@ import com.udacity.project4.data.RemindDataSource
 import com.udacity.project4.local.RemindRepository
 
 import com.udacity.project4.remindlist.RemindDataItem
-import com.udacity.project4.until.Notification
+import com.udacity.project4.until.NotificationUtils
 import org.koin.android.ext.android.get
 
 class TransitionsService : JobIntentService(), CoroutineScope {
@@ -83,7 +83,7 @@ class TransitionsService : JobIntentService(), CoroutineScope {
             if (result is Result.Success<RemindData>) {
                 val reminderDTO = result.data
                 //send a notification to the user with the reminder details
-                Notification(
+                NotificationUtils(
                     this@TransitionsService, RemindDataItem(
                         reminderDTO.title,
                         reminderDTO.description,

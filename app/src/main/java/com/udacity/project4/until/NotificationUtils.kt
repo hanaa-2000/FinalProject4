@@ -7,15 +7,15 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
+//import androidx.databinding.library.BuildConfig
 import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
 import com.udacity.project4.RemindDescriptionActivity
-
 import com.udacity.project4.remindlist.RemindDataItem
 
-private const val NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".channel"
+private const val NOTIFICATION_CHANNEL_ID =  BuildConfig.APPLICATION_ID + ".channel"
 
-fun Notification(context: Context, reminderDataItem: RemindDataItem) {
+fun NotificationUtils(context: Context, reminderDataItem: RemindDataItem) {
     val notificationManager = context
         .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
